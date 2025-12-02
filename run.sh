@@ -49,7 +49,7 @@ fi
 
 # --- Compile ---
 echo "Compiling: $cpp_file"
-g++ -std=c++17 "$cpp_file" -o "$out_file" $extra_flags
+g++ -std=c++17 -O3 "$cpp_file" -o "$out_file" $extra_flags
 if [ $? -ne 0 ]; then
     echo "Compilation failed."
     exit 1
@@ -58,7 +58,7 @@ fi
 # --- Run ---
 echo "Running $out_file with input from $input_file:"
 echo "-----------------------------------------------"
-"$out_file" < "$input_file"
+time "$out_file" < "$input_file"
 echo "-----------------------------------------------"
 
 rm "$out_file"
