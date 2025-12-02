@@ -1,13 +1,14 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: $0 [Date] [Year]"
+    echo "Usage: $0 [Date] [Year] [ExtraCompilerFlags]"
     echo "  Date = DD (default: today's day)"
     echo "  Year = YYYY (default: today's year)"
+    echo "  ExtraCompilerFlags = optional flags passed to g++"
 }
 
 
-if [[ $# -gt 2 ]]; then
+if [[ $# -gt 3 ]]; then
 	usage
 	exit 1
 fi
@@ -17,9 +18,11 @@ today_year=$(date +%Y)
 
 date="${1:-$today_date}"
 year="${2:-$today_year}"
+extra_flags="${3:-}"
 
 echo "Date = $date"
 echo "Year = $year"
+echo "Extra Flags = '$extra_flags'"
 
 # Paths
 folder="$year"
@@ -46,7 +49,7 @@ fi
 
 # --- Compile ---
 echo "Compiling: $cpp_file"
-g++ -std=c++17 "$cpp_file" -o "$out_file"
+g++ -std=c++17 $extra_flags "$cpp_file" -o "$out_file"
 if [ $? -ne 0 ]; then
     echo "Compilation failed."
     exit 1
