@@ -1,5 +1,4 @@
 #include <iostream>
-#include <climits>
 #include <openssl/md5.h>
 #include <iomanip>
 #include <sstream>
@@ -22,15 +21,16 @@ int main()
     std::string key;
     std::cin >> key;
 
-    int answer_1 = 1;
-    while (answer_1 < INT_MAX)
+    int answer_1 = 0;
+    int answer_2 = 0;
+    for (int num = 1; !answer_1 || !answer_2; num++)
     {
-        std::string input = key + std::to_string(answer_1);
+        std::string input = key + std::to_string(num);
         std::string hash = md5(input);
-        std::cout << hash << std::endl;
-        if (hash.substr(0, 5) == "00000") break;
-        answer_1++;
+        if (answer_1 == 0 && hash.substr(0, 5) == "00000") answer_1 = num;
+        if (hash.substr(0, 6) == "000000") answer_2 = num;
     }
 
     std::cout << "Answer 1 :: " << answer_1 << std::endl;
+    std::cout << "Answer 2 :: " << answer_2 << std::endl;
 }

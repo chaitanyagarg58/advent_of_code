@@ -49,7 +49,7 @@ fi
 
 # --- Compile ---
 echo "Compiling: $cpp_file"
-g++ -std=c++17 $extra_flags "$cpp_file" -o "$out_file"
+g++ -std=c++17 "$cpp_file" -o "$out_file" $extra_flags
 if [ $? -ne 0 ]; then
     echo "Compilation failed."
     exit 1
