@@ -2,7 +2,7 @@
 #include <unordered_set>
 #include <vector>
 
-uint32_t apply_move(uint32_t start_location, char move)
+uint64_t apply_move(uint64_t start_location, char move)
 {
     switch (move)
     {
@@ -16,11 +16,11 @@ uint32_t apply_move(uint32_t start_location, char move)
         }
         case '^':
         {
-            return start_location + (1 << 16);
+            return start_location + (1ll << 32);
         }
         case 'v':
         {
-            return start_location - (1 << 16);
+            return start_location - (1ll << 32);
         }
         default:
         {
@@ -31,13 +31,13 @@ uint32_t apply_move(uint32_t start_location, char move)
 
 int solve(const std::string& input, int num_santa = 1)
 {
-    std::vector<uint32_t> locations = std::vector<uint32_t>(num_santa, 0);
-    std::unordered_set<uint32_t> visited;
+    std::vector<uint64_t> locations = std::vector<uint64_t>(num_santa, 0);
+    std::unordered_set<uint64_t> visited;
     visited.insert(0);
     for (int i = 0; i < input.length(); i++)
     {
         char move = input[i];
-        uint32_t& location = locations[i % num_santa];
+        uint64_t& location = locations[i % num_santa];
         location = apply_move(location, move);
         visited.insert(location);
     }
