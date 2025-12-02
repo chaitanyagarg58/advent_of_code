@@ -26,6 +26,6 @@ int main()
 
         pos = new_pos;
     }
-    std::cout << "Part 1:: " << answer_1 << std::endl;
-    std::cout << "Part 2:: " << answer_2 << std::endl;
+    std::cout << "Answer 1 :: " << answer_1 << std::endl;
+    std::cout << "Answer 2 :: " << answer_2 << std::endl;
 }
