@@ -118,7 +118,6 @@ int main()
     std::vector<std::string> wires;
     while (std::getline(std::cin, instruction))
     {
-        bool matched = false;
         for (auto& [gate, regex] : gates)
         {
             std::smatch match;
@@ -132,13 +131,13 @@ int main()
     }
     topological_sort(wires, dependency_graph);
 
-    std::function<int(std::string)> solve = [&](std::string wire) -> int {
+    std::function<int(std::string)> solve = [&](std::string answer_wire) -> int {
         std::unordered_map<std::string, uint16_t> signals;
         for (const std::string& wire: wires)
         {
             wire_config.at(wire).apply_config(signals);
         }
-        return signals[wire];
+        return signals[answer_wire];
     };
     int answer_1 = solve("a");
     wire_config.at("b").input_1 = answer_1;
